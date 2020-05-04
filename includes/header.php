@@ -5,6 +5,9 @@ require_once("user.php");
 require_once("session.php");
 require_once("meal.php");
 require_once("goal.php");
+require_once("point.php");
+
+global $database;
 ?>
 
 <!DOCTYPE html>

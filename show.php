@@ -3,6 +3,12 @@ include("includes/header.php");
 include("includes/navbar.php");
 
 $meal = new Meal();
+$point = new Point();
+$date = $database->escape_string($_GET['day']);
+
+if(!isset($_GET['day'])) {
+    header("Location: index.php");
+}
 
 if(isset($_SESSION['user_id'])){
     $user_id = $_SESSION['user_id'];
@@ -10,10 +16,13 @@ if(isset($_SESSION['user_id'])){
     $user_id = 1;
 }
 
-$date = $database->escape_string($_GET['day']);
-//$user_id = $_SESSION['user_id'];
+if(isset($_POST['check'])) {
+    Point::insert_point_day($user_id);
+}
 
- if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+if(isset($_POST['input'])) {
 
     $meal->name = $_POST['name'];
     $meal->calorie = $_POST['calorie'];
@@ -38,7 +47,7 @@ $date = $database->escape_string($_GET['day']);
                     <input type="text" class="form-control" name="calorie" id="calorie" placeholder="calorie" >
                 </div>
                 
-                <button type="submit" class="btn btn-primary float-right">Submit</button>
+                <button name="input" type="submit" class="btn btn-primary float-right">Submit</button>
             </form>
         </div>
     </div>
@@ -61,7 +70,66 @@ $date = $database->escape_string($_GET['day']);
                 </ul>
             <?php } ?>
             <a href="index.php"><h4 class="btn btn-primary ml-3">Back</h4></a>
-            <div class="float-right mr-4">合計　<?php echo $sum_calorie; ?> カロリー</div>
+            <div class="float-right mr-4">合計　<?php echo $sum_calorie; ?> カロリー</div> 
+
         </div>
+        <h2 class="text-center">Check your day</h2>
+        <form action="" method="post">
+            <div class="form-check ml-5">
+            <?php
+            $status1 = "";
+                $sql = "SELECT * FROM point WHERE user_id = ".$user_id ." AND date =  '" .$date. "'";
+                $select_point = $database->query($sql);
+                   if(mysqli_num_rows($select_point) > 0){
+                        $submit_disabled = "disabled";
+                        while($row = mysqli_fetch_assoc($select_point)){
+
+                            $point_type = $row['point_type'];
+                            $point_value = $row['point_value'];
+                            if($point_type == 'point_type1' && $point_value == 30) {
+                                $status1 = "checked";
+                            } elseif($point_type == 'point_type1' && $point_value == 0) {
+                                $status1 = "";
+                            }
+                            if($point_type == 'point_type2' && $point_value == 30) {
+                                $status2 = "checked";
+                            }  elseif($point_type == 'point_type2' && $point_value == 0) {
+                                $status2 = "";
+                            }
+                            if($point_type == 'point_type3' && $point_value == 30) {
+                                $status3 = "checked";
+                            }  elseif($point_type == 'point_type3' && $point_value == 0) {
+                                $status3 = "";
+                            }
+                        }
+                   } else {
+                    $status1 = "";
+                    $status2 = "";
+                    $status3 = "";
+                }
+            ?>
+            <h5><input class="form-check-input" type="checkbox" name="point_type1" value="point_type1" id="defaultCheck1" <?php echo $status1 ?> >
+                <input type="hidden" name="point_type1_value" value="30">
+                    <label class="form-check-label" for="defaultCheck1">
+                    食べたものすべて記入しましたか。
+                    </label></h5>
+            </div>
+            <div class="form-check ml-5">
+            <h5><input class="form-check-input" type="checkbox" name="point_type2"  value="point_type2" id="defaultCheck2" <?php echo $status2; ?> >
+                    <input type="hidden" name="point_type2_value" value="30">
+                    <label class="form-check-label" for="defaultCheck2">
+                    
+                    正確に調べたカロリーを記入しましたか。
+                    </label></h5>
+            </div>
+            <div class="form-check ml-5">
+                <h5><input class="form-check-input" type="checkbox" name="point_type3"  value="point_type3" id="defaultCheck3" <?php echo $status3; ?> >
+                    <input type="hidden" name="point_type3_value" value="30">
+                    <label class="form-check-label" for="defaultCheck3">
+                    目標カロリーを守りましたか。
+                    </label></h5>
+            </div>
+            <button name="check" type="submit" class="btn btn-primary float-right" <?php echo $submit_disabled ?>>Submit</button>
+        </form>
     </div>
 </div>

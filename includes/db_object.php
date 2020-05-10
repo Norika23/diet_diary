@@ -152,7 +152,7 @@ class Db_object {
         $sql = "UPDATE " . static::$db_table . "  SET ";
         $sql .= implode(", ", $properties_pairs);
         $sql .= " WHERE id = " .  $database->escape_string($this->id);
-
+var_dump($sql);
         $database->query($sql);
 
         return (mysqli_affected_rows($database->connection) == 1) ? true : false ;

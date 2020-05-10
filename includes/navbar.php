@@ -3,8 +3,13 @@
     <h5 class="my-0 mr-md-auto font-weight-normal"><a class="text-dark" href="index.php">Diet Diary</a></h5>
 
     <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="show_status.php">Status</a>
+    </nav>
+
+    <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="show_goal.php">Goal</a>
     </nav>
+
     <?php
 
     if($session->is_signed_in()) {

@@ -6,8 +6,12 @@ require_once("session.php");
 require_once("meal.php");
 require_once("goal.php");
 require_once("point.php");
+require_once("calendar.php");
 
 global $database;
+
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : $user_id = 1;
+
 ?>
 
 <!DOCTYPE html>
@@ -19,4 +23,6 @@ global $database;
     <link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
 </head>

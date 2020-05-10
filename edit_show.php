@@ -4,33 +4,44 @@ include("includes/navbar.php");
 
     $date = $database->escape_string($_GET['day']);
     $user_id = $_SESSION['user_id'];
+    $meal = new Meal();
+
+if(isset($_POST['edit'])) {
+    $meal->id = $_POST['edit'];
+    $meal->user_id = $user_id;
+    $meal->name = $_POST['name'];
+    $meal->calorie = $_POST['calorie'];
+    $meal->date = $_GET['day'];
+    $meal->update();
+    header("Location:show.php?day=".$_GET['day']);
+
+}
+
+    $sql = "SELECT * FROM meal WHERE user_id = $user_id AND id = ".$_GET['meal_id'];
+    $edit_meals = Meal::find_by_query($sql);
+    foreach($edit_meals as $edit_meal) {
 
 ?>
 
 <div class="show-container">
-    <h1 class="text-center">What have you eaten</h1>
-    <div class="m-5">
-        <?php
-            $sql = "SELECT * FROM meal WHERE user_id = $user_id AND date = '$date'";
-            $show_meals = Meal::find_by_query($sql);
-            $sum_calorie = 0;
-            foreach($show_meals as $show_meal) {
-                $sum_calorie += $show_meal->calorie;
-        ?>
-            <ul>
-                <li><?php echo $show_meal->name; ?>
-                    <a href="" class="close ml-4"><span class="float-right" aria-hidden="true">&times;</span></a>
-                    <div class="float-right"><?php echo $show_meal->calorie; ?> カロリー</div>
-                    <hr>
-                </li>
-            </ul>
-        <?php } ?>
-        <a href="edit_show.php"><h4 class="btn btn-primary m-2">Edit</h4></a>
-        <div class="float-right">合計　<?php echo $sum_calorie; ?> カロリー</div>
-        <a class="btn btn-danger" href="">&times;</a>
 
-        <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
+<div class="input-container">
+        <h1 class="text-center m-3">食べたものを編集</h1>
+        <div class="col-md-12">
+            <form method="post" name="input" action="">
+                <div class="form-group center-block">
+                    <label for="name">Food Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="name" required value="<?php echo $edit_meal->name; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="calorie">Calorie</label>
+                    <input type="text" class="form-control" name="calorie" id="calorie" placeholder="calorie" value="<?php echo $edit_meal->calorie; ?>">
+                </div>
+                <button name="edit" value="<?php echo $edit_meal->id; ?>" type="submit" class="btn btn-primary float-right">編集</button>
+            </form>
+        </div>
     </div>
+<?php   }; ?>
+
 </div>
 

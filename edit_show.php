@@ -3,7 +3,6 @@ include("includes/header.php");
 include("includes/navbar.php");
 
     $date = $database->escape_string($_GET['day']);
-    $user_id = $_SESSION['user_id'];
     $meal = new Meal();
 
 if(isset($_POST['edit'])) {

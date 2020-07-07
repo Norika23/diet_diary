@@ -33,24 +33,24 @@ if(isset($_POST['submit'])) {
 
 <div class="row justify-content-center">
     <div class="col-md-3 col-md-offset-3">
-        <h1 class="text-center m-5">Login</h1>
+        <h1 class="text-center m-5">ログイン</h1>
         <h4 class="bg-warning"><?php echo $the_message; ?></h4>
         <form id="login-id" action="" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">ユーザーネーム</label>
                 <input type="text" class="form-control" name="username" value="<?php echo htmlentities($username); ?>" >
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">パスワード</label>
                 <input type="password" class="form-control" name="password" value="<?php echo htmlentities($password); ?>">   
             </div>
             <div class="form-group float-right">
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                <input type="submit" name="submit" value="ログイン" class="btn btn-primary">
             </div>
         </form>
 
     </div>
     <div class="form-group float-right">
-            <a href="register.php"><input type="submit" name="Registration" value="Registration" class="btn btn-info"></a>
+            <a href="register.php"><input type="submit" name="Registration" value="新規登録" class="btn btn-info"></a>
         </div>
 </div>

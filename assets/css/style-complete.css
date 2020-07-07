@@ -1,0 +1,375 @@
+
+
+ 
+.tweet-h-img{
+	width: 50px;
+	overflow: hidden;
+	border-radius: 4px;
+	margin: 0px 5px;
+	vertical-align: top;
+	float: left;
+}
+
+
+.t-fo-left{
+	width:50%;
+	float: left;
+}
+
+.t-fo-left li{
+	width:300px;
+	list-style: none;
+	
+}
+.t-fo-left label{
+	font-size: 25px;
+	color: #83b476;
+	text-decoration: none;
+}
+.t-fo-left input[type="file"]{
+	display: none;
+}
+.t-fo-left a:hover{
+	color:#64d547;
+}
+
+.t-s-f-right {
+    /* width: 90%; */
+    /* float: right; */
+	/* margin: 10px 0px; */
+	
+}
+
+.t-s-f-right ul {
+	list-style: none;
+	display: inline-block;
+}
+
+.t-s-f-right li {
+	display: inline-block;
+	padding-left: 15px;
+}
+.hash-box {
+    position: absolute;
+    background: white;
+    background-color: white;
+    background-color: white;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0px 0px 10px 0px #cacaca;
+    background-color: white;
+    display: block;
+}
+.hash-box ul{
+	margin: 0px auto;
+	padding: 0px;
+}
+.hash-box li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    font-weight: bold;
+	cursor: pointer;
+	list-style: none;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+
+
+.nav-right-down-inner{
+	overflow: hidden;
+}
+
+.nav-right-down-wrap ul{
+	float: none !important;
+}
+.nav-right-down-left{
+	float: left;
+	margin: 0px 5px 0px 0px;
+}
+
+.nav-right-down-left img{
+	width: 35px !important;
+	height: 35px;
+	border-radius: 4px;
+}
+.nav-right-down-right-body{
+	line-height: 7px;
+}
+.nav-right-down-right-headline a{
+	font-weight: bold;
+	padding: 0px 2px;
+	font-size: 14px;
+}
+.nav-right-down-right-headline span{
+	color: #A1A1A1;
+}
+.nav-right-down-right-body span{
+	color: #A1A1A1;	
+	padding: 0px 3px;
+}
+.nav-right-down-right{
+	float: left;
+	margin: 0px 2px;
+}
+.nav-right-down-wrap ul li:hover a{
+	color: #fff;
+}
+.nav-right-down-wrap ul li:hover span{
+	color: #fff;
+}
+
+.t-s-f-right ul li{
+	float: left;
+	margin-right: 20px;
+}
+
+.t-s-f-right ul li .fa{
+	text-decoration:none;
+	color: #AAAFB1;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+
+
+.retweet-popup-body-wrap{
+	width: 550px;
+	height: auto;
+	margin: 0px auto;
+	top: 25%;
+	position: relative;
+	background:#fff;
+	border-radius: 5px;
+	border: 1px solid #9E9E9E;
+	overflow: hidden;
+
+}
+
+.retweet-popup-heading h3{
+    font-weight: normal;
+    font-size: 16px;
+    color: #7d929c;
+}
+
+.retweet-popup-heading{
+	text-align: center;
+	padding: 7px;
+	border-bottom: 1px solid #dde2e6;
+}
+.retweet-popup-heading button{
+	border: none;
+	background: none;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+.retweet-popup-heading span{
+	float: right;
+	position: relative;
+	top: -18px;
+	right: 7px;
+	font-size: 14px;
+	cursor:pointer;
+}
+
+.retweet-popup-heading span i{
+	color: #afb1b3;
+}
+
+.retweet-popup-input{
+	background: rgba(127, 196, 0, 0.18);
+	padding: 10px;
+}
+.retweet-popup-input-inner{
+	width:99%;
+}
+.retweet-popup-input-inner input[type="text"]{
+	width: 96%;
+	padding: 8px 10px;
+	border-radius: 0px;
+	border: 1px solid #dedede;
+}
+.retweet-popup-inner-body{
+
+}
+
+.retweet-popup-inner-body-inner{
+
+}
+.retweet-popup-comment-wrap{
+	width: 95%;
+	margin: 10px auto;
+	overflow: hidden;
+}
+.retweet-popup-comment-head{
+	overflow: hidden;
+	float: left;
+}
+.retweet-popup-comment-head img{
+	width: 45px;
+	height: 45px;
+	border-radius: 5px;
+}
+.retweet-popup-comment-headline{
+	float: left
+}
+
+.retweet-popup-comment-headline a{
+	color:#333;
+	text-decoration: none;
+	font-weight: bold;
+}
+.retweet-popup-comment-headline span{
+	color: #aeaeae;
+	font-weight: normal;
+	font-size: 12px;
+}
+.retweet-popup-comment-body{
+	float: left;
+	overflow: hidden;
+	color: #424242;
+	font-size: 14px;
+}
+.retweet-popup-comment-right-wrap{
+	width: 90%;
+	overflow: hidden;
+	float: left;
+	margin: 0px 0px 0px 5px;
+}
+.retweet-popup-footer-right{
+	float: right;
+}
+.retweet-popup-footer-right button[type="submit"]{
+	background: #3a8efb;
+	padding: 8px 10px;
+	border: 1px solid #E7E7E7;
+	color: #fff;
+	font-weight: bold;
+	margin: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.retweet-popup-footer-right button[type="submit"]:hover{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#499bea+0,207ce5+100;Blue+3d+%237 */
+	background: #499bea; /* Old browsers */
+	background: -moz-linear-gradient(top, #499bea 0%, #207ce5 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #499bea 0%,#207ce5 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #499bea 0%,#207ce5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); /* IE6-9 */
+}
+.retweet-popup-footer-right button[type="submit"]:active{
+	background: #3a8efb;
+	box-shadow: inset 0px 0px 3px black;
+}
+.retweet-popup-footer-right button i{
+	margin: 0px 3px 0px 0px;
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	top: 1px;
+}
+
+
+.wrap5{
+	background-color: rgba(0, 0, 0, 0.34);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0px;
+	left:0px;
+	z-index: 10000;
+	overflow-y: scroll;
+	display: block;
+}
+
+
+.more:hover > ul{
+	display: block;
+}
+.more{
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	user-select: none;
+	cursor:pointer;
+	color: #aaafb1;
+}
+.t-s-f-right ul ul{
+	position: absolute;
+	background: white;
+	border: 1px solid #e7e7e7;
+	border-radius: 4px;
+	display: none;
+	z-index: 1000;
+	padding: 0;
+}
+.more-inner{
+
+}
+.t-s-f-right ul ul li{
+	display: block;
+	margin: 0px ;
+	float: none;
+	cursor: pointer;
+	padding: 0;
+}
+.t-s-f-right ul ul li:hover{
+	background:#245f97;
+	padding: 0;
+	
+}
+.t-s-f-right ul ul li label{
+	-webkit-user-select: none;
+	-moz-user-select:none;
+	user-select: none;
+	cursor:pointer;
+	padding: 10px 20px;
+	display: block;
+
+}
+.t-s-f-right ul ul li:hover> label{
+	color:white;
+}
+.t-s-f-right ul li:hover > ul{
+	display:block;
+}
+
+.more:hover > ul{
+	display: block;
+}
+
+
+/* 
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} */
+.content{
+    margin: 0 auto;
+    padding: 40px;
+}
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #fff;
+    left: 50%;
+    padding: 70px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    /* width: 30%; */
+}

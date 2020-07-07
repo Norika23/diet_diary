@@ -19,6 +19,18 @@ class Db_object {
 
     }
 
+    public static function find_by_user_id($user_id) {
+
+        global $database;
+
+        // $the_result_array = static::find_by_query("SELECT * FROM  " . static::$db_table . " WHERE user_id = $user_id LIMIT 1");
+
+        return static::find_by_query("SELECT * FROM  " . static::$db_table . " WHERE user_id = $user_id");
+
+        // return !empty($the_result_array) ? array_shift($the_result_array) : false;
+
+    }
+
 
     public static function find_by_query($sql) {
 
@@ -152,7 +164,6 @@ class Db_object {
         $sql = "UPDATE " . static::$db_table . "  SET ";
         $sql .= implode(", ", $properties_pairs);
         $sql .= " WHERE id = " .  $database->escape_string($this->id);
-var_dump($sql);
         $database->query($sql);
 
         return (mysqli_affected_rows($database->connection) == 1) ? true : false ;
@@ -174,6 +185,20 @@ var_dump($sql);
 
     }
 
+	public function deleteT($table, $array){
+        global $database;
+		$sql   = "DELETE FROM " . $table;
+		$where = " WHERE ";
+
+		foreach($array as $key => $value){
+			$sql .= $where . $key . " = '" . $value . "'";
+			$where = " AND ";
+		}
+		$sql .= ";";
+		$stmt = $database->query($sql);
+
+	}
+    
 
     public static function count_all() {
 
@@ -186,6 +211,51 @@ var_dump($sql);
         return array_shift($row);
         
     }
+
+
+    public function timeAgo($datetime){
+		$time    = strtotime($datetime);
+ 		$current = time();
+ 		$seconds = $current - $time;
+ 		$minutes = round($seconds / 60);
+		$hours   = round($seconds / 3600);
+		$months  = round($seconds / 2600640);
+
+		if($seconds <= 60){
+			if($seconds == 0){
+				return 'now';
+			}else{
+				return $seconds.'s';
+			}
+		}else if($minutes <= 60){
+
+			return $minutes.'m';
+
+		}else if($hours <= 24){
+
+			return $hours.'h';
+
+		}else if($months <= 12){
+
+			return date('M j', $time);
+
+		}else{
+			return date('j M Y', $time);
+		}
+	}
+
+
+	public function t_create($table, $fields = array()){
+        global $database;
+        $columns = implode(',', array_keys($fields));
+        // var_dump($columns);
+        $values  = '\''.implode("','", array_values($fields)).'\'';
+        $sql     = "INSERT INTO {$table} ({$columns}) VALUES ({$values})";
+        $database->query($sql);
+        return $database->the_insert_id();
+
+    }
+
 
 
 } //end

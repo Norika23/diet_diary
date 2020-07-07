@@ -1,8 +1,17 @@
 
-.container {
+/* .container {
     font-family: 'Noto Sans', sans-serif;
     margin-top: 30px;
-}
+} */
+
+/* .container, .container-md, .container-sm {
+    max-width: 1200px;
+
+} */
+@media screen and (max-width: 760px){
+    .none {display:none}
+    td{width: 50px;}
+    } 
 /* h3 {
     margin-bottom: 30px;
 }
@@ -18,6 +27,7 @@ th {
 /* td a {
     color: #000000;
 } */
+
 .today {
     background: #ddffbc;
 }
@@ -43,7 +53,6 @@ th:nth-of-type(7), td:nth-of-type(7) a {
 .input-container {
     
     max-width: 420px;
-    
     margin: auto;
 
 }
@@ -55,3 +64,12 @@ th:nth-of-type(7), td:nth-of-type(7) a {
     margin: auto;
 
 }
+
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+  }
+
+  .table td, .table th {
+      padding: 0;
+  }

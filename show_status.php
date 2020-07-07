@@ -2,7 +2,6 @@
 include("includes/header.php");
 include("includes/navbar.php");
 
-
 $calendar = new Calendar;
 $user = User::find_by_id($user_id);
 
@@ -11,7 +10,7 @@ $month = date('m') < 10 ? substr(date('m'), 1) : date('m');
 if(isset($_GET['ym'])) {
     $month = substr($_GET['ym'], -2);
     if($month < 10) {
-    $month = substr($month, 1);
+        $month = substr($month, 1);
     }
 }
 
@@ -20,30 +19,47 @@ $for_graph_month = isset($_GET['ym']) ? $_GET['ym'] : date('Y/m');
 //１か月の日数
 $month_day_count = $calendar->day_count;
 
+//体重データの有無の確認
+$sql = "SELECT * FROM weights WHERE user_id = $user_id AND date  LIKE '%$calendar->this_month%'";
+$check_month_weight = $database->query($sql);
+//体重の変数作成
+$weight = 0;
 
-for ( $day = 1; $day <= $month_day_count; $day++) {
+//日数ごとにデータを抽出
+for ($day = 1; $day <= $month_day_count; $day++) {
     if(strlen($day)==1) {
         $dday = '0'.$day;
     } else {
         $dday = $day;
     }
+    //グラフ用の月と日付
     $for_graph_labels[] = "'".$for_graph_month ."/". $dday."'";
-
+    //日ごとの全カロリーを抽出後、合計
     $meal = $database->query("SELECT * FROM meal WHERE user_id = $user->id AND date = '$calendar->this_month/$dday'");
-
     $sum_calorie = 0;
+
     while($row = mysqli_fetch_array($meal)) {    
-        $row['calorie'];
         $sum_calorie += $row['calorie'];
     }
-    $month_day_sum_calorie1[] = $sum_calorie;
-    $max_calorie = max($month_day_sum_calorie1);
+   
+    $day_sum_calorie_total[] = $sum_calorie;
+    $max_calorie = max($day_sum_calorie_total);
     $month_day_sum_calorie[] = "'".$sum_calorie."'";
 
+   if(mysqli_num_rows($check_month_weight) > 0) {
+        $sql = "SELECT * FROM weights WHERE user_id = $user_id AND date  = '$calendar->this_month/$dday'";
+        $select_weight = $database->query($sql);
+        while($row = mysqli_fetch_array($select_weight)) {    
+            $weight= $row['weight'];
+        }
+    }
+   $all_day_weights[] = $weight;
 }
 
-$month_day_sum_calorie = implode( ",", $month_day_sum_calorie);
+ $all_day_weights_string = implode( ",", $all_day_weights);
+ $max_weight = max($all_day_weights);
 
+$month_day_sum_calorie = implode( ",", $month_day_sum_calorie);
 $for_graph_labels = implode( ",", $for_graph_labels);
 
 
@@ -55,7 +71,6 @@ while($row = mysqli_fetch_array($invest_months_calorie)) {
     // $for_graph_calorie[] = "'".$$row['calorie']."'";
     $montsh_sum_calorie += (int)$row['calorie'];
 }
-
 
 //カロリー記入チェックを月ごとに抽出
 $sql = "SELECT COUNT(*) FROM point WHERE user_id = $user_id AND date LIKE '%$calendar->ym%'";
@@ -92,7 +107,6 @@ if($month_total_weight > 0) {
     $text = "キロ太る目安になります。";
 }
 
-
 ?>
 
 <div class="container">
@@ -110,10 +124,10 @@ if($month_total_weight > 0) {
                 // labels: ['2018/01/01', '2018/01/02', '2018/01/03', '2018/01/04', '2018/01/05', '2018/01/06', '2018/01/07'],
                 labels: [<?php echo $for_graph_labels; ?>],
                 datasets: [{
-                    label: '折れ線A',
+                    label: '体重',
                     type: "line",
                     fill: false,
-                    data: [60, 50, 65],
+                    data: [<?php echo $all_day_weights_string ?>],
                     borderColor: "rgb(154, 162, 235)",
                     yAxisID: "y-axis-1",
                 }, {
@@ -124,7 +138,7 @@ if($month_total_weight > 0) {
                 //     borderColor: "rgb(54, 162, 235)",
                 //     yAxisID: "y-axis-1",
                 // }, {
-                    label: '棒グラフ',
+                    label: 'カロリー',
                     data: [<?php echo $month_day_sum_calorie ?>],
                     borderColor: "rgb(255, 99, 132)",
                     backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -143,9 +157,9 @@ if($month_total_weight > 0) {
                         type: "linear",
                         position: "left",
                         ticks: {
-                            max: 70,
-                            min: 0,
-                            stepSize: 1
+                            max: <?php echo $max_weight ?>,
+                            min: <?php echo $user->goal_weight; ?>,
+                            stepSize: 0.1
                         },
                     }, {
                         id: "y-axis-2",
@@ -166,7 +180,7 @@ if($month_total_weight > 0) {
 
     </script>
        
-
+<!-- 
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
@@ -191,8 +205,8 @@ if($month_total_weight > 0) {
                                                <?php echo $month_total_weight.$text; ?></p>
                 </div>
         </div>
-    </div>
+    </div> -->
     <a href="index.php"><h4 class="btn btn-primary ">Back</h4></a>
-    <a href="edit_goal.php?id=<?php echo $user->id; ?>"><h4 class="btn btn-primary  float-right">Edit</h4></a>
+    <!-- <a href="edit_goal.php?id=<?php echo $user->id; ?>"><h4 class="btn btn-primary  float-right">Edit</h4></a> -->
 
 </div>
